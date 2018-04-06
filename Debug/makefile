@@ -109,7 +109,7 @@ all: HeartMaroon.mot
 # Tool invocations
 HeartMaroon.mot: $(LINKER_OUTPUT_OUTPUTS)
 	@echo 'Invoking: Converter'
-	rlink   "C:\Users\hayat\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.abs" -form=stype  -output="C:\Users\hayat\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.mot" -nomessage
+	rlink   "C:\Users\lotus\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.abs" -form=stype  -output="C:\Users\lotus\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.mot" -nomessage
 	@echo 'Finished building target:'
 	@echo.
 	$(MAKE) --no-print-directory post-build
@@ -117,7 +117,7 @@ HeartMaroon.mot: $(LINKER_OUTPUT_OUTPUTS)
 HeartMaroon.abs: $(OBJS) $(LIBRARY_GENERATOR_OUTPUTTYPE_OUTPUTS) $(ALL_ASMS) 
 	@echo 'Invoking: Linker'
 	@echo 'Building target:'
-	rlink  -subcommand="LinkerSubCommand.tmp"  -library="C:\Users\hayat\E2_STU~1\WORKSP~1\HEARTM~1\Debug\HeartMaroon.lib" -noprelink -list="HeartMaroon.map" -show -nooptimize -debug -output="C:\Users\hayat\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.abs" -rom=D=R,D_1=R_1,D_2=R_2 -nocompress -nomessage -nologo
+	rlink  -subcommand="LinkerSubCommand.tmp"  -library="C:\Users\lotus\E2_STU~1\WORKSP~1\HEARTM~1\Debug\HeartMaroon.lib" -noprelink -list="HeartMaroon.map" -show -nooptimize -debug -output="C:\Users\lotus\e2_studio\workspace\HeartMaroon\Debug\HeartMaroon.abs" -rom=D=R,D_1=R_1,D_2=R_2 -nocompress -nomessage -nologo
 	@echo 'Finished building:'
 	@echo.
 
@@ -255,7 +255,7 @@ post-build:
 	-C:\Renesas\E2_STU~1\DEBUGC~1\RENESA~1.EXE HeartMaroon.abs HeartMaroon.x 
 	@echo.
 
-.PHONY: all clean dependents
+.PHONY: all clean dependents $(LINKER_OUTPUT_OUTPUTS)
 .SECONDARY: post-build
 
 -include ../makefile.targets
