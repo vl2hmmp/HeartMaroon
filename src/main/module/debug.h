@@ -1,9 +1,3 @@
-/*
- * debug.h
- *
- *  Created on: 2018/04/05
- *      Author: hayat
- */
 
 #ifndef MAIN_DEBUG_H_
 #define MAIN_DEBUG_H_

@@ -52,8 +52,6 @@ void debugFeed()
 			else
 				PORTD.DR.BIT.B4 = 0;
 			break;
-		default:
-			break;
 	}
 	switch (outDebugLedState) {
 		case None:
@@ -79,8 +77,6 @@ void debugFeed()
 				PORTD.DR.BIT.B5 = 1;
 			else
 				PORTD.DR.BIT.B5 = 0;
-			break;
-		default:
 			break;
 	}
 }
