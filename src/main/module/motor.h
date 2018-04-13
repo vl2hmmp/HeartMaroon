@@ -14,6 +14,6 @@ void initializeMotor();
 
 void setMotorThrottle(Motor motor, int throttle);
 
-void brakingMotor(Motor motor, bool braking);
+void brakingMotor(Motor motor);
 
 #endif /* MAIN_MODULE_MOTOR_H_ */

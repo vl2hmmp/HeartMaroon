@@ -2,14 +2,16 @@
 /*                                                             */
 /*      PROJECT NAME :  HeartMaroon                            */
 
-
-#include <stdio.h>
 #include "iodefine.h"
 #include "vect.h"
+#include "HeartMaroon.h"
+#include "main/module/adconverter.h"
 #include "main/module/timer.h"
 #include "main/module/debug.h"
 #include "main/module/photoreflector.h"
 #include "main/module/motor.h"
+#include "main/module/encorder.h"
+#include "main/service/linetrace.h"
 
 void settingClock()
 {
@@ -27,14 +29,29 @@ void main(void)
 	initializeDebug();
 	initializePhotoreflector();
 	initializeMotor();
+	initializeEncorder();
+	initializeADConverter();
 
 	setLedState(Lighting, Lighting);
 
+	traceBaseToBase(2, FALSE);
+
 	while (1){
-		int photos = getPhotoreflectorState();
+		int val = getADConvertValue(0);
+		if (val < 100)
+			setLedState(None, None);
+		else if (val < 200)
+			setLedState(Pulsing, Pulsing);
+		else if (val < 300)
+			setLedState(SlowFlashing, SlowFlashing);
+		else if (val < 400)
+			setLedState(FastFlashing, FastFlashing);
+		else
+			setLedState(Lighting, Lighting);
 	}
 }
 
 void Excep_TMR0_CMIA0(void){
 	debugFeed();
+	traceFeed();
 }

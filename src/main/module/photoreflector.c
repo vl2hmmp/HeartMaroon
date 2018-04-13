@@ -1,5 +1,4 @@
 
-#include <stdio.h>
 #include "../../iodefine.h"
 #include "photoreflector.h"
 
