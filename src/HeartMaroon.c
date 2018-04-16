@@ -34,9 +34,15 @@ void main(void)
 
 	setLedState(Lighting, Lighting);
 
-	traceBaseToBase(2, FALSE);
+	//traceBaseToBase(2, FALSE);
 
 	while (1){
+		int val = getEncorder(RightMotor);
+		if ((val / 100) % 2 == 0)
+			setLedState(Lighting, Lighting);
+		else
+			setLedState(FastFlashing, FastFlashing);
+		/*
 		int val = getADConvertValue(0);
 		if (val < 100)
 			setLedState(None, None);
@@ -48,6 +54,7 @@ void main(void)
 			setLedState(FastFlashing, FastFlashing);
 		else
 			setLedState(Lighting, Lighting);
+		*/
 	}
 }
 

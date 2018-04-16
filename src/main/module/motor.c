@@ -11,6 +11,9 @@ void initializeMotor()
 	MSTP(MTU6) = 0;
 	MSTP(MTUB) = 0;
 
+	// MTU6 stop count
+	MTUB.TSTR.BIT.CST0 = 1;
+
 	// MTU clock is 750kHz
 	MTU6.TCR.BIT.TPSC = 3;
 
