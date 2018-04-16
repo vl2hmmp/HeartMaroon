@@ -4,16 +4,22 @@
 
 typedef enum
 {
+	InLed,
+	OutLed
+} DebugLed;
+
+typedef enum
+{
 	None,
 	Lighting,
 	SlowFlashing,
 	FastFlashing,
 	Pulsing
-} debugLedState;
+} DebugLedState;
 
 void initializeDebug();
 
-void setLedState(debugLedState left, debugLedState right);
+void setLedState(DebugLed led, DebugLedState state);
 
 void debugFeed();
 

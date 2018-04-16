@@ -2,8 +2,8 @@
 #include "../../iodefine.h"
 #include "debug.h"
 
-volatile static debugLedState inDebugLedState;
-volatile static debugLedState outDebugLedState;
+volatile static DebugLedState inDebugLedState;
+volatile static DebugLedState outDebugLedState;
 volatile static int count;
 
 void initializeDebug()
@@ -14,10 +14,16 @@ void initializeDebug()
 	outDebugLedState = None;
 }
 
-void setLedState(debugLedState in, debugLedState out)
+void setLedState(DebugLed led, DebugLedState state)
 {
-	inDebugLedState = in;
-	outDebugLedState = out;
+	switch (led) {
+		case InLed:
+			inDebugLedState = state;
+			break;
+		case OutLed:
+			outDebugLedState = state;
+			break;
+	}
 }
 
 void debugFeed()

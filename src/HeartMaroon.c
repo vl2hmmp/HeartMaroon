@@ -32,29 +32,29 @@ void main(void)
 	initializeEncorder();
 	initializeADConverter();
 
-	setLedState(Lighting, Lighting);
+	setLedState(InLed, Lighting);
+	setLedState(OutLed, Lighting);
 
 	//traceBaseToBase(2, FALSE);
 
 	while (1){
 		int val = getEncorder(RightMotor);
 		if ((val / 100) % 2 == 0)
-			setLedState(Lighting, Lighting);
+			setLedState(InLed, Lighting);
 		else
-			setLedState(FastFlashing, FastFlashing);
-		/*
-		int val = getADConvertValue(0);
+			setLedState(InLed, FastFlashing);
+
+		val = getADConvertValue(0);
 		if (val < 100)
-			setLedState(None, None);
+			setLedState(OutLed, None);
 		else if (val < 200)
-			setLedState(Pulsing, Pulsing);
+			setLedState(OutLed, Pulsing);
 		else if (val < 300)
-			setLedState(SlowFlashing, SlowFlashing);
+			setLedState(OutLed, SlowFlashing);
 		else if (val < 400)
-			setLedState(FastFlashing, FastFlashing);
+			setLedState(OutLed, FastFlashing);
 		else
-			setLedState(Lighting, Lighting);
-		*/
+			setLedState(OutLed, Lighting);
 	}
 }
 
