@@ -6,6 +6,8 @@ volatile static DebugLedState inDebugLedState;
 volatile static DebugLedState outDebugLedState;
 volatile static int count;
 
+volatile static unsigned long sleepCount;
+
 void initializeDebug()
 {
 	PORTD.DDR.BIT.B4 = 1;
@@ -24,6 +26,12 @@ void setLedState(DebugLed led, DebugLedState state)
 			outDebugLedState = state;
 			break;
 	}
+}
+
+void sleep(int time)
+{
+	unsigned long v = sleepCount + time / 10;
+	while(sleepCount < v);
 }
 
 void debugFeed()
@@ -84,4 +92,6 @@ void debugFeed()
 				PORTD.DR.BIT.B5 = 0;
 			break;
 	}
+
+	sleepCount++;
 }

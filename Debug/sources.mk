@@ -60,4 +60,5 @@ CPP_DEPS :=
 SUBDIRS := \
 src \
 src/main/module \
+src/main/service \
 

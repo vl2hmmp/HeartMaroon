@@ -5,13 +5,16 @@
 #include "iodefine.h"
 #include "vect.h"
 #include "HeartMaroon.h"
-#include "main/module/adconverter.h"
+
+#include "main/module/ad_converter.h"
 #include "main/module/timer.h"
 #include "main/module/debug.h"
 #include "main/module/photoreflector.h"
 #include "main/module/motor.h"
 #include "main/module/encorder.h"
-#include "main/service/linetrace.h"
+#include "main/module/psd_sensor.h"
+#include "main/service/line_trace.h"
+#include "main/service/search_line.h"
 
 void settingClock()
 {
@@ -31,34 +34,56 @@ void main(void)
 	initializeMotor();
 	initializeEncorder();
 	initializeADConverter();
-
+/*
 	setLedState(InLed, Lighting);
 	setLedState(OutLed, Lighting);
+	sleep(1000);
 
-	//traceBaseToBase(2, FALSE);
+	setMotorThrottle(LeftMotor, 40);
+	setMotorThrottle(RightMotor, 40);
+	sleep(1200);
+	setMotorThrottle(LeftMotor, 0);
+	setMotorThrottle(RightMotor, 0);
+	sleep(1000);
 
-	while (1){
-		int val = getEncorder(RightMotor);
-		if ((val / 100) % 2 == 0)
+	searchLine();
+
+	traceBaseToBase(3, FALSE);
+*/
+
+	startEncorder();
+
+	while (1)
+	{
+		int val = (int)getEncorder(RightMotor);
+		if (val % 2 == 0)
 			setLedState(InLed, Lighting);
 		else
-			setLedState(InLed, FastFlashing);
+			setLedState(InLed, None);
 
-		val = getADConvertValue(0);
-		if (val < 100)
-			setLedState(OutLed, None);
-		else if (val < 200)
-			setLedState(OutLed, Pulsing);
-		else if (val < 300)
-			setLedState(OutLed, SlowFlashing);
-		else if (val < 400)
-			setLedState(OutLed, FastFlashing);
-		else
+		val = (int)getEncorder(LeftMotor);
+		if (val % 2 == 0)
 			setLedState(OutLed, Lighting);
+		else
+			setLedState(OutLed, None);
 	}
 }
 
-void Excep_TMR0_CMIA0(void){
+void feed()
+{
 	debugFeed();
+	encodeFeed();
 	traceFeed();
+
+//	int val = getDistance();
+//	if (val < 10)
+//		setLedState(OutLed, None);
+//	else if (val < 20)
+//		setLedState(OutLed, Pulsing);
+//	else if (val < 30)
+//		setLedState(OutLed, SlowFlashing);
+//	else if (val < 40)
+//		setLedState(OutLed, FastFlashing);
+//	else
+//		setLedState(OutLed, Lighting);
 }

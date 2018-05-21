@@ -4,6 +4,8 @@
 
 void initializeEncorder();
 
-int getEncorder(Motor motor);
+float getEncorder(Motor motor);
+
+void encodeFeed();
 
 #endif /* MAIN_MODULE_ENCORDER_H_ */

@@ -10,6 +10,7 @@ RM := rm -rf *.sni *.dbg *.lst *.lis *.lpp *.map *.x *.lbp src/*.src src/*.p src
 -include sources.mk
 -include src/subdir.mk
 -include src/main/module/subdir.mk
+-include src/main/service/subdir.mk
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(CC_UPPER_DEPS)),)
@@ -247,6 +248,7 @@ endif
 	-$(RM) $(LIBRARY_GENERATOR_OUTPUTTYPE_OUTPUTS) $(CONVERTOR_OUTPUT_OUTPUTS) 
 	-rm -rf "src"/*.obj "src"/*.d "src"/*.src "src"/*.p "src"/*.pp "src"/*.mrc "src"/*.prn "src"/*.asm "src"/*.lst
 	-rm -rf "src/main/module"/*.obj "src/main/module"/*.d "src/main/module"/*.src "src/main/module"/*.p "src/main/module"/*.pp "src/main/module"/*.mrc "src/main/module"/*.prn "src/main/module"/*.asm "src/main/module"/*.lst
+	-rm -rf "src/main/service"/*.obj "src/main/service"/*.d "src/main/service"/*.src "src/main/service"/*.p "src/main/service"/*.pp "src/main/service"/*.mrc "src/main/service"/*.prn "src/main/service"/*.asm "src/main/service"/*.lst
 	@echo.
 	@echo 'Clean complete.'
 

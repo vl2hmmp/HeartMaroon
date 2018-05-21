@@ -19,6 +19,8 @@ typedef enum
 
 void initializeDebug();
 
+void sleep(int time);
+
 void setLedState(DebugLed led, DebugLedState state);
 
 void debugFeed();

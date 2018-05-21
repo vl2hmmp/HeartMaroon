@@ -1,6 +1,7 @@
 
 #include "../../iodefine.h"
 #include "../../vect.h"
+#include "../../HeartMaroon.h"
 
 void initializeTimer()
 {
@@ -9,12 +10,12 @@ void initializeTimer()
 	MSTP(TMR1) = 0;
 
 	// allow interrupt
-	IEN(TMR0, CMIA0) = 1;
-	IEN(TMR1, OVI1) = 1;
+	IEN(TMR0, CMIA0) = ALLOW_INTERRUPT;
+	IEN(TMR1, OVI1) = ALLOW_INTERRUPT;
 
 	// set interrupt priority
-	IPR(TMR0, CMIA0) = 1;
-	IPR(TMR1, OVI1) = 1;
+	IPR(TMR0, CMIA0) = LOW_PRIORITY;
+	IPR(TMR1, OVI1) = LOW_PRIORITY;
 
 	// clear on compare match A
 	TMR0.TCR.BYTE = 0x48;//0b01001000
@@ -28,4 +29,8 @@ void initializeTimer()
 
 	// timer 0 compare match every 9.98 millisecond
 	TMR0.TCORA = 0xEA;//234
+}
+
+void Excep_TMR0_CMIA0(){
+	feed();
 }
