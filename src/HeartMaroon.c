@@ -13,6 +13,7 @@
 #include "main/module/motor.h"
 #include "main/module/encorder.h"
 #include "main/module/psd_sensor.h"
+#include "main/module/trajectory_tracking_control.h"
 #include "main/service/line_trace.h"
 #include "main/service/search_line.h"
 
@@ -34,11 +35,19 @@ void main(void)
 	initializeMotor();
 	initializeEncorder();
 	initializeADConverter();
-/*
+	initializeTrajectoryTracking();
+
+	setMotorThrottle(LeftMotor, 0);
+	setMotorThrottle(RightMotor, 0);
+
 	setLedState(InLed, Lighting);
 	setLedState(OutLed, Lighting);
 	sleep(1000);
 
+	startEncorder();
+	trajectoryTracking(0.0F, 90.0F, 5.0F);
+
+/*
 	setMotorThrottle(LeftMotor, 40);
 	setMotorThrottle(RightMotor, 40);
 	sleep(1200);
@@ -51,10 +60,9 @@ void main(void)
 	traceBaseToBase(3, FALSE);
 */
 
-	startEncorder();
-
 	while (1)
 	{
+		/*
 		int val = (int)getEncorder(RightMotor);
 		if (val % 2 == 0)
 			setLedState(InLed, Lighting);
@@ -66,14 +74,16 @@ void main(void)
 			setLedState(OutLed, Lighting);
 		else
 			setLedState(OutLed, None);
+			*/
 	}
 }
 
 void feed()
 {
 	debugFeed();
-	encodeFeed();
+	encoderFeed();
 	traceFeed();
+	trackingFeed();
 
 //	int val = getDistance();
 //	if (val < 10)

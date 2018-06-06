@@ -2,6 +2,8 @@
 #ifndef MAIN_SERVICE_LINE_TRACE_H_
 #define MAIN_SERVICE_LINE_TRACE_H_
 
+#include "../../HeartMaroon.h"
+
 void traceBaseToBase(int number, bool blocking);
 
 void traceWait();

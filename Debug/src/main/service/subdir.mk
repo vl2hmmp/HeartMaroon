@@ -4,15 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-..\src/main/service/linetrace.c \
+..\src/main/service/line_trace.c \
 ..\src/main/service/search_line.c 
 
 C_DEPS += \
-./src/main/service/linetrace.d \
+./src/main/service/line_trace.d \
 ./src/main/service/search_line.d 
 
 OBJS += \
-./src/main/service/linetrace.obj \
+./src/main/service/line_trace.obj \
 ./src/main/service/search_line.obj 
 
 

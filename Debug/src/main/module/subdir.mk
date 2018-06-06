@@ -4,33 +4,39 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-..\src/main/module/adconverter.c \
+..\src/main/module/ad_converter.c \
+..\src/main/module/dead_reckoning.c \
 ..\src/main/module/debug.c \
 ..\src/main/module/encorder.c \
 ..\src/main/module/motor.c \
 ..\src/main/module/photoreflector.c \
-..\src/main/module/psdsensor.c \
+..\src/main/module/psd_sensor.c \
 ..\src/main/module/timer.c \
+..\src/main/module/trajectory_tracking_control.c \
 ..\src/main/module/utils.c 
 
 C_DEPS += \
-./src/main/module/adconverter.d \
+./src/main/module/ad_converter.d \
+./src/main/module/dead_reckoning.d \
 ./src/main/module/debug.d \
 ./src/main/module/encorder.d \
 ./src/main/module/motor.d \
 ./src/main/module/photoreflector.d \
-./src/main/module/psdsensor.d \
+./src/main/module/psd_sensor.d \
 ./src/main/module/timer.d \
+./src/main/module/trajectory_tracking_control.d \
 ./src/main/module/utils.d 
 
 OBJS += \
-./src/main/module/adconverter.obj \
+./src/main/module/ad_converter.obj \
+./src/main/module/dead_reckoning.obj \
 ./src/main/module/debug.obj \
 ./src/main/module/encorder.obj \
 ./src/main/module/motor.obj \
 ./src/main/module/photoreflector.obj \
-./src/main/module/psdsensor.obj \
+./src/main/module/psd_sensor.obj \
 ./src/main/module/timer.obj \
+./src/main/module/trajectory_tracking_control.obj \
 ./src/main/module/utils.obj 
 
 

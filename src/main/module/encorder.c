@@ -4,27 +4,19 @@
 #include "motor.h"
 #include "encorder.h"
 
+volatile static float diameter;
+
 volatile static long leftCount;
 volatile static long rightCount;
 
 void initializeEncorder()
 {
+	diameter = 0.060;// [m]
+
 	// release standby
 	MSTP(MTU1) = 0;
 	MSTP(MTU2) = 0;
 	MSTP(MTUA) = 0;
-
-	// allow interrupt
-	//IEN(MTU1, TCIV1) = ALLOW_INTERRUPT;
-	//IEN(MTU1, TCIU1) = ALLOW_INTERRUPT;
-	//IEN(MTU2, TCIV2) = ALLOW_INTERRUPT;
-	//IEN(MTU2, TCIU2) = ALLOW_INTERRUPT;
-
-	// set interrupt priority
-	//IPR(MTU1, TCIV1) = HIGH_PRIORITY;
-	//IPR(MTU1, TCIU1) = HIGH_PRIORITY;
-	//IPR(MTU2, TCIV2) = HIGH_PRIORITY;
-	//IPR(MTU2, TCIU2) = HIGH_PRIORITY;
 
 	// MTU1 stop count
 	MTUA.TSTR.BIT.CST1 = 0;
@@ -76,7 +68,12 @@ float getEncorder(Motor motor)
 	return 0;
 }
 
-void encodeFeed()
+float convertRotate2Meter(float rotate)
+{
+	return diameter * PI * rotate;
+}
+
+void encoderFeed()
 {
 	leftCount += MTU2.TCNT - 32768;
 	rightCount += MTU1.TCNT - 32768;
