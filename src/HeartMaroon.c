@@ -14,6 +14,7 @@
 #include "main/module/encorder.h"
 #include "main/module/psd_sensor.h"
 #include "main/module/trajectory_tracking_control.h"
+#include "main/module/dead_reckoning.h"
 #include "main/service/line_trace.h"
 #include "main/service/search_line.h"
 
@@ -36,6 +37,7 @@ void main(void)
 	initializeEncorder();
 	initializeADConverter();
 	initializeTrajectoryTracking();
+	initializeDeadReckoning();
 
 	setMotorThrottle(LeftMotor, 0);
 	setMotorThrottle(RightMotor, 0);
@@ -45,20 +47,19 @@ void main(void)
 	sleep(1000);
 
 	startEncorder();
+	//trajectoryTracking(0.7F, 0.0F, 5.0F);
+
+	//searchLine();
+
+	//traceBaseToBase(3, FALSE);
+
+	setBasePosition();
+
+	trajectoryTracking(0.7F, 0.0F, 5.0F);
+
 	trajectoryTracking(0.0F, 90.0F, 5.0F);
 
-/*
-	setMotorThrottle(LeftMotor, 40);
-	setMotorThrottle(RightMotor, 40);
-	sleep(1200);
-	setMotorThrottle(LeftMotor, 0);
-	setMotorThrottle(RightMotor, 0);
-	sleep(1000);
-
-	searchLine();
-
-	traceBaseToBase(3, FALSE);
-*/
+	returnBase();
 
 	while (1)
 	{
@@ -84,6 +85,7 @@ void feed()
 	encoderFeed();
 	traceFeed();
 	trackingFeed();
+	deadReckoningFeed();
 
 //	int val = getDistance();
 //	if (val < 10)

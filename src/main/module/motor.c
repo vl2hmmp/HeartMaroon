@@ -50,6 +50,10 @@ void initializeMotor()
 
 void setMotorThrottle(Motor motor, int throttle)
 {
+	// 左右の回転速度が異なるため調整
+	if (motor == RightMotor)
+		throttle *= 0.5;
+
 	char forwardFlag = 0 <= throttle;
 	char reverseFlag = throttle < 0;
 	int th = limit(throttle, -100, 100);

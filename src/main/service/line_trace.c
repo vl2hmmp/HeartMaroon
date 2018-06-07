@@ -11,17 +11,11 @@ volatile static int cooldown = 0;
 
 void traceBaseToBase(int number, bool blocking)
 {
-	numOfMove = number;
+	numOfMove = 0 < number ? number : 0;
 	cooldown = 100;
 
-	if (0 < numOfMove){
-		setMotorThrottle(LeftMotor, 40);
-		setMotorThrottle(RightMotor, 40);
-	}
-	else{
-		setMotorThrottle(LeftMotor, -40);
-		setMotorThrottle(RightMotor, -40);
-	}
+	setMotorThrottle(LeftMotor, 24);
+	setMotorThrottle(RightMotor, 24);
 
 	if (blocking)
 		traceWait();
@@ -50,38 +44,38 @@ void traceFeed()
 	}
 
 	if (photos == 0 || photos == 1001){
-		setMotorThrottle(LeftMotor, 30);
-		setMotorThrottle(RightMotor, 30);
+		setMotorThrottle(LeftMotor, 24);
+		setMotorThrottle(RightMotor, 24);
 	}
 	else if (photos == 1011)
 	{
-		setMotorThrottle(LeftMotor, 30);
+		setMotorThrottle(LeftMotor, 26);
 		setMotorThrottle(RightMotor, 20);
 	}
 	else if (photos == 1101)
 	{
 		setMotorThrottle(LeftMotor, 20);
-		setMotorThrottle(RightMotor, 30);
+		setMotorThrottle(RightMotor, 26);
 	}
 	else if (photos == 11)
 	{
-		setMotorThrottle(LeftMotor, 20);
-		setMotorThrottle(RightMotor, 10);
+		setMotorThrottle(LeftMotor, 26);
+		setMotorThrottle(RightMotor, 16);
 	}
 	else if (photos == 1100)
 	{
-		setMotorThrottle(LeftMotor, 10);
-		setMotorThrottle(RightMotor, 20);
+		setMotorThrottle(LeftMotor, 16);
+		setMotorThrottle(RightMotor, 26);
 	}
 	else if (photos == 111)
 	{
-		setMotorThrottle(LeftMotor, 20);
-		setMotorThrottle(RightMotor, -5);
+		setMotorThrottle(LeftMotor, 26);
+		setMotorThrottle(RightMotor, -20);
 	}
 	else if (photos == 1110)
 	{
-		setMotorThrottle(LeftMotor, -5);
-		setMotorThrottle(RightMotor, 20);
+		setMotorThrottle(LeftMotor, -20);
+		setMotorThrottle(RightMotor, 26);
 	}
 }
 

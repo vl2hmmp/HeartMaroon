@@ -23,6 +23,8 @@ src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/module/psd_sensor.h
 ../src/main/module/psd_sensor.h:
 src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/module/trajectory_tracking_control.h
 ../src/main/module/trajectory_tracking_control.h:
+src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/module/dead_reckoning.h
+../src/main/module/dead_reckoning.h:
 src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/service/line_trace.h
 ../src/main/service/line_trace.h:
 src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/service/search_line.h

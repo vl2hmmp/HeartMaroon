@@ -5,7 +5,7 @@
 
 void searchLine()
 {
-	setMotorThrottle(LeftMotor, 20);
+	setMotorThrottle(LeftMotor, 26);
 	setMotorThrottle(RightMotor, 0);
 
 	while (getPhotoreflectorState() == 1111);

@@ -2,9 +2,9 @@
 #ifndef MAIN_MODULE_TRAJECTORY_TRACKING_CONTROL_H_
 #define MAIN_MODULE_TRAJECTORY_TRACKING_CONTROL_H_
 
-#define Deg2Rad  0.0174533f
+#define Deg2Rad 0.0174533F
 
-#define P_GAIN 8000.0F
+#define P_GAIN 7000.0F
 
 void trackingFeed();
 void initializeTrajectoryTracking();
