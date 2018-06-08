@@ -29,3 +29,5 @@ src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/service/line_trace.h
 ../src/main/service/line_trace.h:
 src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/service/search_line.h
 ../src/main/service/search_line.h:
+src/HeartMaroon.obj src/HeartMaroon.d: ../src/main/service/search_ball.h
+../src/main/service/search_ball.h:

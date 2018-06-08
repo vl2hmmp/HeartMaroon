@@ -16,7 +16,7 @@ volatile static float previouslyRightPosition;// [m]
 
 void initializeDeadReckoning()
 {
-	width= 0.263;// [m]
+	width= 0.256;// [m]
 }
 
 void setBasePosition()
@@ -29,6 +29,13 @@ void setBasePosition()
 	previouslyRightPosition = convertRotate2Meter(getEncorder(RightMotor));
 }
 
+void getLocations(float* posX, float* posY, float* dir)
+{
+	*posX = positionX;
+	*posY = positionY;
+	*dir = direction;
+}
+
 void returnBase()
 {
 	float px = positionX;
@@ -39,12 +46,15 @@ void returnBase()
 	if (errno == EDOM)
 		rad = 0;
 
-	trajectoryTracking(0.0F, (0.0F - d + rad) * Rad2Deg, 5.0F);
+	trajectoryTracking(0.0F, (0.0F - d + rad) * Rad2Deg, 3.0F);
+	waitForTracking();
 
 	float len = sqrt(px * px + py * py);
-	trajectoryTracking(0.0F - len, 0.0F, 5.0F);
+	trajectoryTracking(0.0F - len, 0.0F, 3.0F);
+	waitForTracking();
 
-	trajectoryTracking(0.0F, (0.0F - rad) * Rad2Deg, 5.0F);
+	trajectoryTracking(0.0F, (0.0F - rad) * Rad2Deg, 3.0F);
+	waitForTracking();
 }
 
 void deadReckoningFeed()

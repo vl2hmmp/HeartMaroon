@@ -15,5 +15,6 @@
 -input="./src/main/module/trajectory_tracking_control.obj"
 -input="./src/main/module/utils.obj"
 -input="./src/main/service/line_trace.obj"
+-input="./src/main/service/search_ball.obj"
 -input="./src/main/service/search_line.obj"
 -start=SU,SI,B_1,R_1,B_2,R_2,B,R/04,PResetPRG,C_1,C_2,C,C$*,D*,W*,L,PIntPRG,P/0FFF80000,FIXEDVECT/0FFFFFF80

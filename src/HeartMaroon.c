@@ -17,6 +17,7 @@
 #include "main/module/dead_reckoning.h"
 #include "main/service/line_trace.h"
 #include "main/service/search_line.h"
+#include "main/service/search_ball.h"
 
 void settingClock()
 {
@@ -47,34 +48,38 @@ void main(void)
 	sleep(1000);
 
 	startEncorder();
-	//trajectoryTracking(0.7F, 0.0F, 5.0F);
 
 	//searchLine();
 
 	//traceBaseToBase(3, FALSE);
 
 	setBasePosition();
-
-	trajectoryTracking(0.7F, 0.0F, 5.0F);
-
-	trajectoryTracking(0.0F, 90.0F, 5.0F);
-
-	returnBase();
+	setSearchingBase();
+	float dir = 0;
+	float dst = 0;
+	bool result = searchBall(&dir, &dst);
+	if (result){
+		trajectoryTracking(0.0F, dir * Rad2Deg, 3.0F);
+		waitForTracking();
+		trajectoryTracking(dst, 0.0F, 3.0F);
+		waitForTracking();
+		returnBase();
+	}
 
 	while (1)
 	{
 		/*
-		int val = (int)getEncorder(RightMotor);
-		if (val % 2 == 0)
-			setLedState(InLed, Lighting);
-		else
-			setLedState(InLed, None);
-
-		val = (int)getEncorder(LeftMotor);
-		if (val % 2 == 0)
-			setLedState(OutLed, Lighting);
-		else
+		float val = getDistance();
+		if (val < 0.1)
 			setLedState(OutLed, None);
+		else if (val < 0.2)
+			setLedState(OutLed, Pulsing);
+		else if (val < 0.3)
+			setLedState(OutLed, SlowFlashing);
+		else if (val < 0.4)
+			setLedState(OutLed, FastFlashing);
+		else
+			setLedState(OutLed, Lighting);
 			*/
 	}
 }
@@ -86,16 +91,4 @@ void feed()
 	traceFeed();
 	trackingFeed();
 	deadReckoningFeed();
-
-//	int val = getDistance();
-//	if (val < 10)
-//		setLedState(OutLed, None);
-//	else if (val < 20)
-//		setLedState(OutLed, Pulsing);
-//	else if (val < 30)
-//		setLedState(OutLed, SlowFlashing);
-//	else if (val < 40)
-//		setLedState(OutLed, FastFlashing);
-//	else
-//		setLedState(OutLed, Lighting);
 }

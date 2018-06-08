@@ -6,6 +6,7 @@
 
 void initializeDeadReckoning();
 void setBasePosition();
+void getLocations(float* posX, float* posY, float* dir);
 void returnBase();
 void deadReckoningFeed();
 

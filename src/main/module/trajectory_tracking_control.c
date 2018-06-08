@@ -1,4 +1,5 @@
 
+#include "../../HeartMaroon.h"
 #include "encorder.h"
 #include "motor.h"
 #include "trajectory_tracking_control.h"
@@ -16,6 +17,8 @@ volatile static float rightTrajectory[1024];// [m]
 
 volatile static float leftInitialPosition;// [m]
 volatile static float rightInitialPosition;// [m]
+volatile static float leftAccumulatedError;// [m]
+volatile static float rightAccumulatedError;// [m]
 
 void trackingFeed() {
 	if (maxTime <= nowTime)
@@ -23,19 +26,27 @@ void trackingFeed() {
 
 	float leftPosition = convertRotate2Meter(getEncorder(LeftMotor)) - leftInitialPosition;
 	float rightPosition = convertRotate2Meter(getEncorder(RightMotor)) - rightInitialPosition;
+	leftAccumulatedError += leftTrajectory[nowTime] - leftPosition;
+	rightAccumulatedError += rightTrajectory[nowTime] - rightPosition;
+	float leftVerocity = leftTrajectory[nowTime + 1] - leftTrajectory[nowTime];
+	float rightVerocity = rightTrajectory[nowTime + 1] - rightTrajectory[nowTime];
 
-	int leftThrottle = P_GAIN * (leftTrajectory[nowTime] - leftPosition);
-	int rightThrottle = P_GAIN * (rightTrajectory[nowTime] - rightPosition);
+	int leftThrottle = P_GAIN * (leftTrajectory[nowTime] - leftPosition) + I_GAIN * leftAccumulatedError + D_GAIN * leftVerocity;
+	int rightThrottle = P_GAIN * (rightTrajectory[nowTime] - rightPosition) + I_GAIN * rightAccumulatedError + D_GAIN * rightVerocity;
 
 	setMotorThrottle(LeftMotor, leftThrottle);
 	setMotorThrottle(RightMotor, rightThrottle);
 
 	nowTime++;
+	if (maxTime == nowTime){
+		setMotorThrottle(LeftMotor, 0);
+		setMotorThrottle(RightMotor, 0);
+	}
 }
 
 void initializeTrajectoryTracking() {
 	samplingTime = 0.01F;// [s]
-	width= 0.263;// [m]
+	width= 0.256;// [m]
 }
 
 void trajectoryTracking(float length, float angle, float time) {
@@ -47,14 +58,19 @@ void trajectoryTracking(float length, float angle, float time) {
 	// 現在位置を初期位置としてセット
 	leftInitialPosition = convertRotate2Meter(getEncorder(LeftMotor));
 	rightInitialPosition = convertRotate2Meter(getEncorder(RightMotor));
+	leftAccumulatedError = 0;
+	rightAccumulatedError = 0;
 	nowTime = 0;
+}
 
-	// 追従終了まで待機
-	while (nowTime < maxTime);
+void waitForTracking()
+{
+	while(isTracking());
+}
 
-	// 停止
-	setMotorThrottle(LeftMotor, 0);
-	setMotorThrottle(RightMotor, 0);
+bool isTracking()
+{
+	return nowTime < maxTime;
 }
 
 static void makeTrajectory(float length, float angle, float time)

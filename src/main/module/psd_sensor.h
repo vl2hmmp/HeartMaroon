@@ -7,6 +7,6 @@
 #define COEFFICIENT_C -2.669235294
 #define COEFFICIENT_D 329.7386555
 
-int getDistance();
+float getDistance();
 
 #endif /* MAIN_MODULE_PSD_SENSOR_H_ */
